@@ -4,11 +4,40 @@
 
 {% block body %}
 {% if app.user %}
-    {# Page pour utilisateur connecté - à venir #}
-    <div class="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-base-200">
-        <div class="text-center">
-            <h1 class="text-4xl font-bold mb-4">Bienvenue {{ app.user.firstName }} !</h1>
-            <p class="text-lg">Votre tableau de bord arrive bientôt...</p>
+    {# Page d'accueil pour utilisateurs connectés #}
+    <div class="min-h-[calc(100vh-4rem)] bg-gradient-to-b from-primary/10 to-base-200">
+        <div class="hero min-h-[calc(100vh-4rem)]">
+            <div class="hero-content text-center">
+                <div class="max-w-2xl">
+                    <h1 class="text-5xl font-bold mb-6">
+                        Bonjour {{ app.user.firstName }} ! 👋
+                    </h1>
+                    <p class="text-xl mb-4">
+                        Bienvenue sur tampinout
+                    </p>
+
+                    {% if hasActiveTampon %}
+                        <div class="alert alert-info shadow-lg mb-8 inline-flex">
+                            <span>🩸 Vous avez actuellement un tampon en place</span>
+                        </div>
+                    {% else %}
+                        <div class="alert shadow-lg mb-8 inline-flex">
+                            <span>✅ Pas de tampon actuellement</span>
+                        </div>
+                    {% endif %}
+
+                    <div class="flex gap-4 justify-center flex-wrap">
+                        <a href="{{ path('app_suivi') }}" class="btn btn-primary btn-lg">
+                            📊 Accéder à mon suivi
+                        </a>
+                    </div>
+
+                    <div class="mt-12 text-base-content/70">
+                        <p class="mb-2">Un seul clic pour enregistrer vos changements de tampon</p>
+                        <p>Simple, rapide, sécurisé</p>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 {% else %}
