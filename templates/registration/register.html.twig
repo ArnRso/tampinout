@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+<div class="min-h-[calc(100vh-4rem)] flex items-center justify-center bg-base-200 py-12 px-4 sm:px-6 lg:px-8">
+    <div class="card w-full max-w-md bg-base-100 shadow-xl">
+        <div class="card-body">
+            <h2 class="card-title text-3xl font-bold text-center mb-6">Créer un compte</h2>
+
+            {% for message in app.flashes('error') %}
+                <div class="alert alert-error mb-4">
+                    <span>{{ message }}</span>
+                </div>
+            {% endfor %}
+
+            {{ form_start(registrationForm) }}
+                <div class="form-control w-full mb-4">
+                    {{ form_label(registrationForm.firstName, null, {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(registrationForm.firstName, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(registrationForm.firstName) }}
+                </div>
+
+                <div class="form-control w-full mb-4">
+                    {{ form_label(registrationForm.email, null, {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(registrationForm.email, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(registrationForm.email) }}
+                </div>
+
+                <div class="form-control w-full mb-4">
+                    {{ form_label(registrationForm.plainPassword.first, null, {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(registrationForm.plainPassword.first, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(registrationForm.plainPassword.first) }}
+                </div>
+
+                <div class="form-control w-full mb-6">
+                    {{ form_label(registrationForm.plainPassword.second, null, {'label_attr': {'class': 'label'}}) }}
+                    {{ form_widget(registrationForm.plainPassword.second, {'attr': {'class': 'input input-bordered w-full'}}) }}
+                    {{ form_errors(registrationForm.plainPassword.second) }}
+                </div>
+
+                <div class="form-control mt-6">
+                    <button type="submit" class="btn btn-primary w-full">S'inscrire</button>
+                </div>
+            {{ form_end(registrationForm) }}
+
+            <div class="divider">OU</div>
+
+            <p class="text-center">
+                Vous avez déjà un compte ?
+                <a href="{{ path('app_login') }}" class="link link-primary">Se connecter</a>
+            </p>
+        </div>
+    </div>
+</div>
+{% endblock %}
