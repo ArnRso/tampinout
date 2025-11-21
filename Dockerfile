@@ -41,6 +41,10 @@ RUN npm run build
 # Copy Caddyfile
 COPY Caddyfile /etc/caddy/Caddyfile
 
+# Copy entrypoint script
+COPY docker-entrypoint.sh /docker-entrypoint.sh
+RUN chmod +x /docker-entrypoint.sh
+
 # Create var directory and set permissions
 RUN mkdir -p var/cache var/log var/data \
     && chown -R www-data:www-data var \
@@ -52,5 +56,5 @@ EXPOSE 80 443
 # Set environment to production by default
 ENV APP_ENV=prod
 
-# Start FrankenPHP
-CMD ["frankenphp", "run", "--config", "/etc/caddy/Caddyfile"]
+# Start application using entrypoint script
+CMD ["/docker-entrypoint.sh"]
